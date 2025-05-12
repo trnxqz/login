@@ -6,12 +6,81 @@
   <title>eLearning CUTM - Login</title>
   <link rel="stylesheet" href="style.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"/>
+  <style>
+    .password-container {
+      position: relative;
+      width: 100%;
+    }
+
+    .password-container input {
+      width: 100%;
+      padding: 10px 38px 10px 10px;
+      font-size: 14px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+    }
+
+    .password-container i {
+      position: absolute;
+      right: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      cursor: pointer;
+      color: #000000;
+    }
+
+    footer a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .login-form-container form > p {
+      margin-top: 20px;
+      text-align: center;
+    }
+
+    .social-login {
+      margin-top: 20px;
+      text-align: center;
+    }
+
+    .social-login p {
+      margin-bottom: 10px;
+      font-weight: 500;
+    }
+
+    .social-icons a img {
+      width: 32px;
+      height: 32px;
+      margin: 0 8px;
+      transition: transform 0.3s ease;
+    }
+
+    .social-icons a img:hover {
+      transform: scale(1.1);
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      font-size: 22px;
+      font-weight: bold;
+      gap: 10px;
+    }
+
+    .logo-icon {
+      margin-right: 10px;
+    }
+  </style>
 </head>
 <body>
 
+  <!-- Navbar -->
   <header class="navbar">
     <div class="logo">
-      <i class="fa-solid fa-book-open" style="color: #fd973d;"></i> eLearning CUTM
+      <i class="fa-solid fa-book-open logo-icon" style="color: #fd973d;"></i>
+      <span>eLearning CUTM</span>
     </div>
     <nav class="nav-links">
       <ul>
@@ -43,10 +112,15 @@
       <input type="text" id="last-name" placeholder="Prenumele" required>
       <input type="text" id="phone" placeholder="Număr de telefon" required>
       <input type="email" id="email" placeholder="Email Id" required>
-      <input type="password" id="password" placeholder="Parolă" required>
+      <div class="password-container">
+        <input type="password" id="password" placeholder="Parolă" required>
+        <i class="fa-solid fa-eye-slash" id="togglePassword"></i>
+      </div>
       <a href="#">Forget Password?</a>
       <button type="submit">Submit Now</button>
+
       <p>Don’t Have any Account? <a href="file:///C:/Users/user/Desktop/Register/index.html">Sign Up</a></p>
+
       <div class="social-login">
         <p>Login With Social Media</p>
         <div class="social-icons">
@@ -60,11 +134,12 @@
     </form>
   </div>
 
+  <!-- Footer -->
   <footer>
     <div class="footer-container">
       <div class="footer-left">
         <div class="logo">
-          <i class="fa-solid fa-book-open" style="color: #fda140;"></i>
+          <i class="fa-solid fa-book-open logo-icon" style="color: #fda140;"></i>
           <span>eLearning CUTM</span>
         </div>
         <p>
@@ -110,25 +185,41 @@
     </div>
   </footer>
 
+
   <script>
-    // Login form validation and redirect
+    document.getElementById('togglePassword').addEventListener('click', function () {
+      const passwordInput = document.getElementById('password');
+      const icon = this;
+      const isHidden = passwordInput.type === 'password';
+
+      passwordInput.type = isHidden ? 'text' : 'password';
+      icon.classList.toggle('fa-eye');
+      icon.classList.toggle('fa-eye-slash');
+    });
+
+    
     document.getElementById('loginForm').addEventListener('submit', function(e) {
       e.preventDefault();
 
-      var firstName = document.getElementById('first-name').value;
-      var lastName = document.getElementById('last-name').value;
-      var phone = document.getElementById('phone').value;
-      var email = document.getElementById('email').value;
-      var password = document.getElementById('password').value;
+      const firstName = document.getElementById('first-name').value;
+      const lastName = document.getElementById('last-name').value;
+      const phone = document.getElementById('phone').value;
+      const email = document.getElementById('email').value;
+      const password = document.getElementById('password').value;
 
-      // Check if the entered credentials match the predefined ones
-      if (firstName === 'Traian' && lastName === 'Boboc' && phone === '+37368105543' && email === 'traianb415@gmail.com' && password === 'traian009_') {
-        // Redirect to Logout page upon successful login
+      if (
+        firstName === 'Traian' &&
+        lastName === 'Boboc' &&
+        phone === '+37368105543' &&
+        email === 'traianb415@gmail.com' &&
+        password === 'traian009_'
+      ) {
         window.location.href = 'file:///C:/Users/user/Desktop/Logout/index.html';
       } else {
-        alert('Invalid credentials. Please try again.');
+        alert('Date greșite. Încearcă din nou.');
       }
     });
   </script>
+
 </body>
 </html>
